@@ -7,7 +7,7 @@ import logging
 AGENT_VERSION = "0.23"
 token = 'HPcWR7l4NJNJ'
 server_ip = '192.168.47.130'
-
+port = '80'
 
 def log(log_name, path=None):
     logging.basicConfig(level=logging.INFO,
@@ -136,7 +136,7 @@ def asset_info_post():
     logging.info('Get the hardwave infos from host:')
     logging.info(asset_info())
     logging.info('----------------------------------------------------------')
-    post_data("http://{0}/cmdb/collect".format(server_ip), asset_info())
+    post_data("http://{0}:{1}/cmdb/collect".format(server_ip,port), asset_info())
     if not pv:
         os.environ["LANG"] = osenv
     return True
@@ -247,7 +247,7 @@ def agg_sys_info():
     logging.info(sys_info)
     json_data = json.dumps(sys_info)
     logging.info('----------------------------------------------------------')
-    post_data("http://{0}/monitor/received/sys/info/".format(server_ip), json_data)
+    post_data("http://{0}:{1}/monitor/received/sys/info/".format(server_ip,port), json_data)
     return True
 
 
